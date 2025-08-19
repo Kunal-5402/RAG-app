@@ -68,7 +68,7 @@ class GuardRailEngine:
 def test_end_to_end_scenario():
     """Test complete end-to-end scenarios."""
     print("=" * 60)
-    print("🚀 BYD SEAL RAG Pipeline - End-to-End Test")
+    print("BYD SEAL RAG Pipeline - End-to-End Test")
     print("=" * 60)
     
     guardrail = GuardRailEngine()
@@ -130,7 +130,7 @@ def test_end_to_end_scenario():
         }
     ]
     
-    print("\n🧪 Testing Query Processing Scenarios:")
+    print("\nTesting Query Processing Scenarios:")
     print("-" * 60)
     
     for i, scenario in enumerate(test_scenarios, 1):
@@ -142,17 +142,17 @@ def test_end_to_end_scenario():
         
         # Check if sensitive
         is_sensitive = guardrail.is_sensitive_query(query)
-        sensitivity_status = "🔒 SENSITIVE" if is_sensitive else "✅ SAFE"
+        sensitivity_status = "[SENSITIVE]" if is_sensitive else "[SAFE]"
         print(f"  Sensitivity: {sensitivity_status}")
         
         # Simulate facts availability  
         facts_results = [{"distance": 0.1, "content": "relevant fact"}] if has_facts else []
-        facts_status = f"📊 {len(facts_results)} facts available" if facts_results else "📊 No facts found"
+        facts_status = f"{len(facts_results)} facts available" if facts_results else "No facts found"
         print(f"  Facts: {facts_status}")
         
         # Check if should use external
         use_external = guardrail.should_use_external(query, facts_results)
-        external_status = "🌐 Will use external" if use_external else "🏠 Facts only"
+        external_status = "Will use external" if use_external else "Facts only"
         print(f"  External: {external_status}")
         
         # Filter external content if needed
@@ -210,33 +210,33 @@ def test_end_to_end_scenario():
         
         # Validate response
         if response['status'] == 'answered' and response['citations']:
-            print(f"  Citations: ✅ {len(response['citations'])} source(s)")
+            print(f"  Citations: SUCCESS - {len(response['citations'])} source(s)")
         elif response['status'] == 'refused':
-            print(f"  Citations: ✅ Properly refused sensitive query")
+            print(f"  Citations: SUCCESS - Properly refused sensitive query")
         else:
-            print(f"  Citations: ⚠️  No data available")
+            print(f"  Citations: WARNING - No data available")
     
     print("\n" + "=" * 60)
-    print("✅ End-to-End Test Summary")
+    print("End-to-End Test Summary")
     print("=" * 60)
-    print("🔒 Sensitive Query Protection: WORKING")
+    print("Sensitive Query Protection: WORKING")
     print("   • Pricing queries protected when no facts available")
     print("   • Context-aware sensitivity (colors vs availability)")
     print()
-    print("📊 Facts-First Strategy: WORKING") 
+    print("Facts-First Strategy: WORKING") 
     print("   • Official data always takes priority")
     print("   • External sources filtered for sensitive content")
     print()
-    print("🌐 External Source Filtering: WORKING")
+    print("External Source Filtering: WORKING")
     print("   • Pricing/warranty content removed from external sources")
     print("   • General review content preserved")
     print()
-    print("📋 Response Format: COMPLIANT")
+    print("Response Format: COMPLIANT")
     print("   • All responses include proper citations")  
     print("   • Status field indicates response type")
     print("   • Clear refusal messages for sensitive queries")
     print()
-    print("🚫 No Hallucinations: GUARANTEED")
+    print("No Hallucinations: GUARANTEED")
     print("   • Only information from source documents")
     print("   • Clear refusals when information unavailable")
     print("=" * 60)
@@ -245,16 +245,16 @@ def test_end_to_end_scenario():
 if __name__ == "__main__":
     test_end_to_end_scenario()
     
-    print("\n🎉 RAG Pipeline Core Functionality Successfully Demonstrated!")
+    print("\nRAG Pipeline Core Functionality Successfully Demonstrated!")
     print("\nKey Features Verified:")
-    print("✅ Facts-first retrieval strategy")
-    print("✅ Sensitive information protection") 
-    print("✅ External content filtering")
-    print("✅ Proper source citations")
-    print("✅ No hallucination guarantees")
-    print("✅ Compliant response formatting")
+    print("SUCCESS: Facts-first retrieval strategy")
+    print("SUCCESS: Sensitive information protection") 
+    print("SUCCESS: External content filtering")
+    print("SUCCESS: Proper source citations")
+    print("SUCCESS: No hallucination guarantees")
+    print("SUCCESS: Compliant response formatting")
     
-    print(f"\n📝 Note: This test demonstrates the core logic.")
+    print(f"\nNote: This test demonstrates the core logic.")
     print(f"    The full implementation includes vector database,")
     print(f"    LLM integration, and FastAPI server.")
     print(f"    All components follow the same guardrail principles.")

@@ -42,7 +42,7 @@ conda activate rag
 
 3. Set up environment variables:
 ```bash
-cp .env.example .env
+touch .env
 # Edit .env file with your OpenAI API key
 ```
 

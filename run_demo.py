@@ -35,19 +35,19 @@ def test_api_endpoint(question, expected_status=None):
                 print("Citations: None")
             
             if expected_status and data['status'] != expected_status:
-                print(f"⚠️  Expected status '{expected_status}' but got '{data['status']}'")
+                print(f"WARNING: Expected status '{expected_status}' but got '{data['status']}'")
             else:
-                print("✓ Response received successfully")
+                print("SUCCESS: Response received successfully")
                 
         else:
-            print(f"❌ API Error: {response.status_code} - {response.text}")
+            print(f"ERROR: API Error: {response.status_code} - {response.text}")
             
     except requests.exceptions.ConnectionError:
-        print("❌ Connection failed. Is the server running on http://localhost:8000?")
+        print("ERROR: Connection failed. Is the server running on http://localhost:8000?")
     except requests.exceptions.Timeout:
-        print("❌ Request timeout. Server may be processing...")
+        print("ERROR: Request timeout. Server may be processing...")
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"ERROR: {e}")
 
 def main():
     """Run demo queries to test the RAG pipeline."""
@@ -60,13 +60,13 @@ def main():
         health_response = requests.get("http://localhost:8000/health", timeout=5)
         if health_response.status_code == 200:
             health_data = health_response.json()
-            print(f"✓ Server is healthy")
+            print("SUCCESS: Server is healthy")
             print(f"  Facts documents: {health_data.get('facts_documents', 'Unknown')}")
             print(f"  External documents: {health_data.get('external_documents', 'Unknown')}")
         else:
-            print("⚠️  Server health check failed")
+            print("WARNING: Server health check failed")
     except:
-        print("❌ Cannot connect to server. Please run: python main.py")
+        print("ERROR: Cannot connect to server. Please run: python main.py")
         return
     
     # Test cases
